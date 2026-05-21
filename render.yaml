@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sheets-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GOOGLE_CREDENTIALS
+        sync: false        # ใส่เองใน Render Dashboard
+      - key: SPREADSHEET_ID
+        value: 1IbeRjQTUVZqjsusAb0UrxaHtzaqvgw5sAX5HpsEL7qavV-kSMMzlT1W3
