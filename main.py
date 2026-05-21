@@ -96,3 +96,17 @@ def clear_range(range: str, sheet_name: str = None):
 @app.get("/")
 def root():
     return {"status": "ok", "message": "Google Sheets API is running 🚀"}
+    @app.get("/debug")
+def debug():
+    import os
+    try:
+        with open("/etc/secrets/credentials.json") as f:
+            data = json.load(f)
+        return {
+            "file_found": True,
+            "client_email": data.get("client_email"),
+            "private_key_start": data.get("private_key", "")[:30],
+            "private_key_has_newline": "\\n" in data.get("private_key", "")
+        }
+    except Exception as e:
+        return {"file_found": False, "error": str(e)}
