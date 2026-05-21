@@ -18,9 +18,8 @@ app.add_middleware(
 SPREADSHEET_ID = os.environ.get("SPREADSHEET_ID", "1IbeRjQTUVZqjsusAb0UrxaHtzaqvgw5sAX5HpsEL7qavV-kSMMzlT1W3")
 
 def get_sheet(sheet_name: str = None):
-    creds_json = json.loads(os.environ["GOOGLE_CREDENTIALS"])
-    creds = Credentials.from_service_account_info(
-        creds_json,
+    creds = Credentials.from_service_account_file(
+        "/etc/secrets/credentials.json",
         scopes=["https://www.googleapis.com/auth/spreadsheets"]
     )
     gc = gspread.authorize(creds)
